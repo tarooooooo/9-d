@@ -60,7 +60,7 @@ class UsersController < ApplicationController
       @book_counts = "値を入力してください"
     else
       created_at = params[:created_at]
-      @book_counts = @books.where(['created_at LIKE ?', "#{created_at}%"]).count
+      @book_counts = @books.where(["created_at LIKE ?", "#{created_at}%"]).count
     end
   end
 

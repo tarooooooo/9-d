@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-
+  root to: 'homes#top'
   get 'rooms/index'
   get 'rooms/show'
   devise_for :users
 
   resources :users, only: [:show,:index,:edit,:update,:create,:new] do
-    get "search" , to: "users#search"
+    get "countsearch" , to: "users#search"
     resource :relationships, only: [:create,:destroy]
     get :follows, on: :member
     get :followers, on: :member
@@ -21,6 +21,5 @@ Rails.application.routes.draw do
   post 'rooms/:id' => 'rooms#show'
 
   get 'search' => "searches#search"
-  root to: 'homes#top'
   get 'home/about' => 'homes#about'
 end

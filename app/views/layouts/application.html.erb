@@ -4,7 +4,7 @@
     <title>Bookers2</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-   
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -21,11 +21,9 @@
       <p id="notice">
         <%= flash[:notice] %>
       </p>
-      
-      <% if content_for?(:body_attributes) %>
- 　　  　　 <%= yield(:body_attributes) %>
-      <% end %>
-      
+
+     
+
       <%= yield %>
     </main>
     <footer>

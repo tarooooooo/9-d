@@ -16,6 +16,9 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: "Relationship",foreign_key: :follower_id
   has_many :followers, through: :passive_relationships, source: :followed
 
+  has_many :group_users
+  has_many :groups , through: :group_users
+  
   attachment :profile_image
 
   validates :name, presence: true, length: {minimum: 2,maximum: 20} , uniqueness: true

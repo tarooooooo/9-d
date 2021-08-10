@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: [:show,:index,:edit,:update,:create,:new] do
-    get "countsearch" , to: "users#search"
+    get "countsearch" => "users#search"
     resource :relationships, only: [:create,:destroy]
     get :follows, on: :member
     get :followers, on: :member
@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
   resources :messages, only: [:create, :destroy]
   resources :rooms, only: [:create, :index, :show]
+  
+  resources :groups, only: [:new,:index,:create,:edit, :update, :show]
+  
   post 'rooms/:id' => 'rooms#show'
 
   get 'search' => "searches#search"

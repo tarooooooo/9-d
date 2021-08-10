@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class ="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h3>Create Group</h3>
+      <%= form_with model:@group do |f| %>
+      <div class="form_group">
+        <p>グループ名</p>
+        <%= f.text_field :name,  class:'form-control name', placeholder: 'グループ名を入力してください' %>
+      </div>
+      <div class="form_group">
+        <p>紹介文</p>
+        <%= f.text_area :introduction, class:"form-control"%>
+      </div>
+      <div class="form_group">
+        <p>グループ画像</p>
+        <%= f.attachment_field :image, placeholder: 'グループ画像' ,class:"form-control-file user_image" %>
+      </div>
+      <div class="form_group">
+        <%= f.hidden_field :owner_id , value: current_user.id %>
+      </div>
+      <div class="form_group">
+        <%= f.submit "Create Group" ,class:"btn btn-info mt-2"%>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

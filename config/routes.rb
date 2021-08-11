@@ -18,9 +18,11 @@ Rails.application.routes.draw do
 
   resources :messages, only: [:create, :destroy]
   resources :rooms, only: [:create, :index, :show]
-  
-  resources :groups, only: [:new,:index,:create,:edit, :update, :show]
-  
+
+  resources :groups, only: [:new,:index,:create,:edit, :update, :show] do
+    get 'groupcreate' => "groups#groupcreate"
+    get 'groupdestroy' => 'groups#groupdestroy'
+  end
   post 'rooms/:id' => 'rooms#show'
 
   get 'search' => "searches#search"

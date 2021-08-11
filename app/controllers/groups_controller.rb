@@ -19,6 +19,8 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @group_owner = User.find(@group.owner_id)
+    @groupmenbers = @group.users
+
   end
 
   def edit
@@ -35,6 +37,24 @@ class GroupsController < ApplicationController
       end
     end
   end
+
+  def groupcreate
+    if groupuser = GroupUser.create(user_id: current_user.id , group_id: params[:group_id])
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def groupdestroy
+    group_user = GroupUser.find_by(user_id: current_user.id ,group_id: params[:group_id] )
+    if group_user.destroy
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   private
   def group_params
     params.require(:group).permit(:image, :name, :introduction, :owner_id)

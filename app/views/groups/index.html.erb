@@ -5,6 +5,7 @@
       <th></th>
       <th>グループ名</th>
       <th>紹介文</th>
+      <th>メンバー数</th>
       <th></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <td><%= attachment_image_tag group, :image ,:fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg"  %></td>
       <td><%=link_to group.name, group_path(group) %></td>
       <td><%= group.introduction %></td>
+      <td><%= group.users.count %></td>
       <% if group.owner_id == current_user.id %>
         <td><%=link_to "Edit", edit_group_path(group) %></td>
       <% end %>

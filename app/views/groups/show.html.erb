@@ -1,3 +1,5 @@
+<%= render 'users/list' , user: current_user %>
+
 <h3>Group Detail</h3>
 <table class= "table">
   <thead>
@@ -14,8 +16,16 @@
       <td><%= attachment_image_tag @group, :image ,:fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg"  %></td>
       <td><%=link_to @group.name, group_path(@group) %></td>
       <td><%= @group.introduction %></td>
-      <td><%= @group_owner.name %></td>
-      <td><%=link_to "Join this group" ,class:"btn btn-info" %></td>
+      <% @groupmenbers.each do |member| %>
+        <td><%= member.name %></td>
+        <% end %>
+        <% unless @group_owner == current_user %>
+          <% if @group.users.include?(current_user) %>
+            <td><%= link_to "Leave this group" , group_groupdestroy_path(@group) , class:"btn btn-danger" %></td>
+          <% else %>
+            <td><%=link_to "Join this group", group_groupcreate_path(@group) , class:"btn btn-info" %></td>
+          <% end %>
+        <% end %>
     </tr>
   </tbody>
 </table>

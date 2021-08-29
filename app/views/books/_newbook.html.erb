@@ -13,7 +13,7 @@
     </div>
 
     <div class="form-group row" id="star">
-      <%= f.label :rate,'重要度 ', class:'col-md-1 col-form-label' %>
+      <%= f.label :rate,'Rate:', class:'p-1' %>
       <%= f.hidden_field :rate, id: :review_star %>
     </div>
 
@@ -23,7 +23,7 @@
 
   <% end %>
 
-  <!-- リアルタイムプレビュー -->
+
   <script type="text/javascript">
    <!-- 評価 -->
     $('#star').raty({

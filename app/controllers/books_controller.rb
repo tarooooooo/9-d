@@ -18,6 +18,15 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @book = Book.new
+
+    sort_word = params[:sort_word]
+  if sort_word.present?
+    if sort_word == "new"
+      @books = Book.all.order(created_at: :desc)
+    elsif sort_word == "rate"
+      @books = Book.all.order(rate: :desc)
+    end
+  else
     to = Time.current.at_end_of_day
     from = (to - 6.day).at_beginning_of_day
     @books = Book.all.includes(:favorited_users).
@@ -25,6 +34,7 @@ class BooksController < ApplicationController
         b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
         a.favorited_users.includes(:favorites).where(created_at: from...to).size
       }
+  end
   end
 
   def show

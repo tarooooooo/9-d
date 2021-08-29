@@ -60,8 +60,20 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.web_console.whitelisted_ips = '0.0.0.0/0'
 
-
-
+  # メール送信用
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    port:                 587,
+    address:              'smtp.gmail.com',
+    domain:               'gmail.com',
+    # 以下にメールアドレスを入力
+    user_name:            'sample@gmail.com',
+    # 以下にパスワードを入力
+    password:             '',
+    authentication:       'login',
+    enable_starttls_auto: true
+  }
 
 
 

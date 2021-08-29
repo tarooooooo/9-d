@@ -55,6 +55,18 @@ class GroupsController < ApplicationController
     end
   end
 
+  def mail_new
+    @group = Group.find(params[:group_id])
+  end
+  
+  def mail_send
+    @group = Group.find(params[:group_id])
+    group_users = @group.users
+    @mail_title = params[:mail_title]
+    @mail_content = params[:mail_content]
+    ContactMailer.send_mail(@mail_title, @mail_content, group_users).deliver
+  end
+  
   private
   def group_params
     params.require(:group).permit(:image, :name, :introduction, :owner_id)

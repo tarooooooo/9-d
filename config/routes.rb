@@ -22,10 +22,12 @@ Rails.application.routes.draw do
   resources :groups, only: [:new,:index,:create,:edit, :update, :show] do
     get 'groupcreate' => "groups#groupcreate"
     get 'groupdestroy' => 'groups#groupdestroy'
+    get 'new/mail' => 'groups#mail_new'
+    get 'send/mail' => 'groups#mail_send'
   end
   post 'rooms/:id' => 'rooms#show'
 
   get 'search' => "searches#search"
   get 'home/about' => 'homes#about'
-  
+
 end

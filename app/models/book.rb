@@ -5,6 +5,7 @@ class Book < ApplicationRecord
   has_many :favorites,        dependent: :destroy
   has_many :favorited_users , through: :favorites, source: :user
   has_many :book_comments,    dependent: :destroy
+  belongs_to :category
 
   validates :title , presence: true
   validates :body ,  length: {maximum: 200}, presence: true
@@ -41,4 +42,9 @@ class Book < ApplicationRecord
       @book = Book.where("body LIKE ?" , "%#{words}%")
     end
   end
+
+  def self.category_looks(words)
+    @category = Category.where('name LIKE ?', "#{words}")
+  end
+
 end

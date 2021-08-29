@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :baria_user, only: [:edit]
 
   def show
-
+    @categories = Category.all
     @user = User.find(params[:id])
 
   # 今日から６日前の投稿数、前日比計算
@@ -65,6 +65,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    @categories = Category.all
     @user  = current_user
     @book  = Book.new
     @users = User.all

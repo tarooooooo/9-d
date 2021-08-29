@@ -18,14 +18,18 @@ class BooksController < ApplicationController
   def index
     @user = current_user
     @book = Book.new
-
-    sort_word = params[:sort_word]
-  if sort_word.present?
-    if sort_word == "new"
-      @books = Book.all.order(created_at: :desc)
-    elsif sort_word == "rate"
-      @books = Book.all.order(rate: :desc)
-    end
+    @categories = Category.all
+  # ソートさせる記述
+  #   sort_word = params[:sort_word]
+  # if sort_word.present?
+  #   if sort_word == "new"
+  #     @books = Book.all.order(created_at: :desc)
+  #   elsif sort_word == "rate"
+  #     @books = Book.all.order(rate: :desc)
+  #   end
+  # else
+  if params[:sort]
+     @books = Book.all.order(params[:sort])
   else
     to = Time.current.at_end_of_day
     from = (to - 6.day).at_beginning_of_day
@@ -35,9 +39,11 @@ class BooksController < ApplicationController
         a.favorited_users.includes(:favorites).where(created_at: from...to).size
       }
   end
+# end
   end
 
   def show
+    @categories = Category.all
     @book = Book.new
     @user_book = Book.find(params[:id])
     @user = @user_book.user
@@ -68,7 +74,7 @@ class BooksController < ApplicationController
    private
 
    def book_params
-     params.require(:book).permit(:title,:body,:rate)
+     params.require(:book).permit(:title,:body,:rate,:category_id)
    end
 
    def baria_book

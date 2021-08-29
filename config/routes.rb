@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+ 
   root to: 'homes#top'
   get 'rooms/index'
   get 'rooms/show'
@@ -29,5 +30,8 @@ Rails.application.routes.draw do
 
   get 'search' => "searches#search"
   get 'home/about' => 'homes#about'
-
+  
+  get 'category_search' => 'categories#search'
+  resources :categories, except: [:new, :show]
+  
 end

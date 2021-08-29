@@ -3,11 +3,11 @@
 
   <div class="row">
     <div class ="col-md-3">
-      
+
       <%= render'list',user:@user,book:@book %>
       <%= render 'users/follow_btn' , user:@user %>
       <%= render 'users/chat_btn' , user:@user %>
-      <%= render 'books/newbook' , book:@book %>
+      <%= render 'books/newbook' , book:@book, categories:@categories %>
 
     </div>
     <div class ="col-md-8 offset-md-1">
@@ -15,7 +15,7 @@
   　　<div id="userbooks">
         <%=render 'users/userbooks' , user_books:@user_books %>
   　　</div>
-  　　
+
       <%#= render 'users/book_counts' %>
 
       <%#= render 'users/week_book_counts'%>

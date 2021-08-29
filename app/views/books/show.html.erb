@@ -9,6 +9,7 @@
             <th></th>
             <th>Title</th>
             <th>Opinion</th>
+            <th>Category</th>
             <th colspan=8></th>
 
           </tr>
@@ -35,6 +36,10 @@
               <%= @user_book.body %>
             </td>
 
+            <td>
+              <%= @user_book.category.name %>
+            </td>
+            
             <td id ="Favorites-buttons<%= @user_book.id %>">
              <%= render partial: "favorites/like", locals: { book: @user_book }%>
            </td>

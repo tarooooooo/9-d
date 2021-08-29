@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <%= render 'users/list',user:@user,book:@book%>
-    <div class ="col-md-8 offset-md-1">
+
       <h2>Book detail</h2>
       <table class="table">
         <therd>
@@ -45,6 +45,24 @@
             <td>
              閲覧数: <%= @user_book.impressionist_count(:filter=>:session_hash) %>
             </td>
+            
+            <td>
+              <div id="star-rate-<%= @user_book.id %>"></div>
+              <script>
+                // 繰り返し処理でもidをidを一意にできるようにnote_idを入れる
+              $('#star-rate-<%= @user_book.id %>').raty({
+                size: 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                half: true,
+                // 読み込みだけで入力できない
+                readOnly: true,
+                score: <%= @user_book.rate %>,
+               });
+              </script>
+            </td>
+                
             <% if @user_book.user == current_user %>
 
             <td>
@@ -79,6 +97,6 @@
       <%= f.submit "送信" , class:"btn btn-success" %>
       </div>
       <% end %>
-    </div>
+
   </div>
 </div>
